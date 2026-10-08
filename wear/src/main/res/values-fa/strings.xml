@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">قبله‌نمای واچ</string>
+    <string name="wear_finding_location">در حال یافتن موقعیت…</string>
+    <string name="wear_permission_needed">برای پیدا کردن جهت قبله به مجوز موقعیت‌مکانی نیاز است.</string>
+    <string name="wear_grant_permission">اجازه بده</string>
+    <string name="wear_no_location">موقعیت پیدا نشد. به فضای باز بروید و دوباره امتحان کنید.</string>
+    <string name="wear_retry">تلاش مجدد</string>
+    <string name="wear_no_compass">این ساعت سنسور قطب‌نما ندارد.</string>
+    <string name="wear_distance_km">%1$d کیلومتر تا کعبه</string>
+    <string name="wear_my_location">موقعیت فعلی من</string>
+    <string name="wear_change_location">تغییر موقعیت</string>
+    <string name="wear_back">بازگشت</string>
+    <string name="wear_stop_adhan">توقف اذان</string>
+
+    <!-- نام‌های اوقات شرعی -->
+    <string name="wear_prayer_fajr">فجر</string>
+    <string name="wear_prayer_sunrise">طلوع</string>
+    <string name="wear_prayer_dhuhr">ظهر</string>
+    <string name="wear_prayer_asr">عصر</string>
+    <string name="wear_prayer_sunset">غروب</string>
+    <string name="wear_prayer_maghrib">مغرب</string>
+    <string name="wear_prayer_isha">عشاء</string>
+    <string name="wear_prayer_midnight">نیمه‌شب</string>
+    <string name="wear_prayer_times_title">اوقات شرعی</string>
+    <string name="wear_open_prayer_times">اوقات شرعی</string>
+
+    <!-- روش محاسبه -->
+    <string name="wear_method_title">روش محاسبه</string>
+    <string name="wear_method_tehran">دانشگاه تهران</string>
+    <string name="wear_method_jafari">فقه جعفری (شیعه)</string>
+
+    <!-- آلارم اذان -->
+    <string name="wear_alarm_settings_title">آلارم اذان</string>
+    <string name="wear_open_alarm_settings">آلارم اذان</string>
+    <string name="adhan_time_title">وقت اذان %1$s است</string>
+    <string name="adhan_tap_to_stop">برای قطع صدا ضربه بزنید</string>
+    <string name="stop_sound_action">قطع صدا</string>
+    <string name="adhan_channel_name">اذان</string>
+    <string name="adhan_channel_desc">اعلان‌های وقت نماز</string>
+</resources>

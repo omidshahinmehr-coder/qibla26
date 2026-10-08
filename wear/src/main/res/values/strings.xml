@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Qibla Watch</string>
+    <string name="wear_finding_location">Locating…</string>
+    <string name="wear_permission_needed">Location permission is needed to find the qibla direction.</string>
+    <string name="wear_grant_permission">Grant</string>
+    <string name="wear_no_location">Couldn\'t get a location fix. Move outdoors and try again.</string>
+    <string name="wear_retry">Retry</string>
+    <string name="wear_no_compass">This watch has no compass sensor.</string>
+    <string name="wear_distance_km">%1$d km to the Kaaba</string>
+    <string name="wear_my_location">My Location</string>
+    <string name="wear_change_location">Change location</string>
+    <string name="wear_back">Back</string>
+    <string name="wear_stop_adhan">Stop adhan</string>
+
+    <!-- Prayer time labels -->
+    <string name="wear_prayer_fajr">Fajr</string>
+    <string name="wear_prayer_sunrise">Sunrise</string>
+    <string name="wear_prayer_dhuhr">Dhuhr</string>
+    <string name="wear_prayer_asr">Asr</string>
+    <string name="wear_prayer_sunset">Sunset</string>
+    <string name="wear_prayer_maghrib">Maghrib</string>
+    <string name="wear_prayer_isha">Isha</string>
+    <string name="wear_prayer_midnight">Midnight</string>
+    <string name="wear_prayer_times_title">Prayer Times</string>
+    <string name="wear_open_prayer_times">Prayer times</string>
+
+    <!-- Calculation method -->
+    <string name="wear_method_title">Calculation Method</string>
+    <string name="wear_method_tehran">University of Tehran</string>
+    <string name="wear_method_jafari">Ja\'fari (Shia)</string>
+
+    <!-- Adhan alarm -->
+    <string name="wear_alarm_settings_title">Adhan Alarm</string>
+    <string name="wear_open_alarm_settings">Adhan alarm</string>
+    <string name="adhan_time_title">It\'s time for %1$s</string>
+    <string name="adhan_tap_to_stop">Tap to stop the sound</string>
+    <string name="stop_sound_action">Stop sound</string>
+    <string name="adhan_channel_name">Adhan</string>
+    <string name="adhan_channel_desc">Prayer time alerts</string>
+</resources>
