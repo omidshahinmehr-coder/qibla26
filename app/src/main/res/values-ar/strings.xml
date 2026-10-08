@@ -170,18 +170,18 @@
     <string name="shrine_measured_from">القياس من: %1$s</string>
     <string name="shrine_all_distances">المسافة إلى جميع المراقد</string>
     <string name="shrine_swipe_hint">اسحب يميناً أو يساراً لاختيار المرقد</string>
-    <string name="shrine_najaf_name">مرقد الإمام علي (ع)</string>
+    <string name="shrine_najaf_name">مرقد الإمام علي علیه السلام</string>
     <string name="shrine_najaf_city">النجف الأشرف</string>
-    <string name="shrine_karbala_name">مرقد الإمام الحسين (ع)</string>
+    <string name="shrine_karbala_name">مرقد الإمام الحسين علیه السلام</string>
     <string name="shrine_karbala_city">كربلاء المقدسة</string>
-    <string name="shrine_kadhimiya_name">مرقد الإمامين الكاظمين (ع)</string>
+    <string name="shrine_kadhimiya_name">مرقد الإمامين الكاظمين علیهما السلام</string>
     <string name="shrine_kadhimiya_city">الكاظمية، بغداد</string>
-    <string name="shrine_samarra_name">مرقد الإمامين العسكريين (ع)</string>
+    <string name="shrine_samarra_name">مرقد الإمامين العسكريين علیهما السلام</string>
     <string name="shrine_samarra_city">سامراء</string>
-    <string name="shrine_mashhad_name">مرقد الإمام الرضا (ع)</string>
+    <string name="shrine_mashhad_name">مرقد الإمام الرضا علیه السلام</string>
     <string name="shrine_mashhad_city">مشهد</string>
-    <string name="shrine_nabawi_name">المسجد النبوي الشريف (ص)</string>
+    <string name="shrine_nabawi_name">مرقد رسول الله صلی الله علیه و آله و مراقد أئمة البقيع علیهم السلام </string>
     <string name="shrine_nabawi_city">المدينة المنورة</string>
-    <string name="shrine_zaynab_name">مقام السيدة زينب (ع)</string>
+    <string name="shrine_zaynab_name">مقام السيدة زينب علیها السلام</string>
     <string name="shrine_zaynab_city">دمشق</string>
 </resources>
