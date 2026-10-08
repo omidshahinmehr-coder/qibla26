@@ -1,0 +1,572 @@
+package com.qibla.prayertimes.model
+
+/**
+ * One catalog entry with names in all three languages the phone app supports, plus
+ * coordinates. This is pure data with no Android Context/locale dependency, so it can be
+ * shared as-is by both the phone app (which picks a name using the user's in-app language
+ * choice — see the app module's own model/CityCatalog.kt) and the watch app (which picks a name
+ * using the device's system language, since the watch has no language setting of its own).
+ */
+data class CityCatalogEntry(
+    val nameFa: String,
+    val nameEn: String,
+    val nameAr: String,
+    val lat: Double,
+    val lon: Double
+) {
+    fun nameFor(language: String): String = when (language) {
+        "fa" -> nameFa
+        "ar" -> nameAr
+        else -> nameEn
+    }
+}
+
+/** The full default-city list — all Iranian provincial capitals, county seats and major cities, the shrine cities, and major world cities. */
+val DEFAULT_CITY_CATALOG: List<CityCatalogEntry> = listOf(
+    // --- حرمین شریفین / The Two Holy Mosques ---
+    CityCatalogEntry("مکه مکرمه", "Mecca", "مكة المكرمة", 21.4225, 39.8262),
+    CityCatalogEntry("مدینه منوره", "Medina", "المدينة المنورة", 24.5247, 39.5692),
+
+    // --- شهرهای زیارتی عراق / Iraqi pilgrimage cities ---
+    CityCatalogEntry("کربلا", "Karbala", "كربلاء", 32.6149, 44.0246),
+    CityCatalogEntry("نجف", "Najaf", "النجف", 31.9986, 44.3325),
+    CityCatalogEntry("کاظمین (بغداد)", "Kadhimiya (Baghdad)", "الكاظمية (بغداد)", 33.3785, 44.3405),
+    CityCatalogEntry("سامرا", "Samarra", "سامراء", 34.1959, 43.8742),
+    CityCatalogEntry("بغداد", "Baghdad", "بغداد", 33.3152, 44.3661),
+    CityCatalogEntry("بصره", "Basra", "البصرة", 30.5085, 47.7835),
+
+    // --- شام و منطقه / Levant ---
+    CityCatalogEntry("دمشق", "Damascus", "دمشق", 33.5138, 36.2765),
+    CityCatalogEntry("بیروت", "Beirut", "بيروت", 33.8938, 35.5018),
+    CityCatalogEntry("قدس (بیت‌المقدس)", "Jerusalem", "القدس", 31.7683, 35.2137),
+
+    // --- استان‌های مرکز ایران / Central Iran ---
+    CityCatalogEntry("تهران", "Tehran", "طهران", 35.6892, 51.3890),
+    CityCatalogEntry("قم", "Qom", "قم", 34.6401, 50.8764),
+    CityCatalogEntry("کرج", "Karaj", "كرج", 35.8400, 50.9391),
+    CityCatalogEntry("اراک", "Arak", "أراك", 34.0954, 49.6900),
+    CityCatalogEntry("قزوین", "Qazvin", "قزوين", 36.2688, 50.0041),
+    CityCatalogEntry("سمنان", "Semnan", "سمنان", 35.5769, 53.3971),
+
+    // --- خراسان / Khorasan ---
+    CityCatalogEntry("مشهد", "Mashhad", "مشهد", 36.2605, 59.6168),
+    CityCatalogEntry("نیشابور", "Nishapur", "نيسابور", 36.2133, 58.7958),
+    CityCatalogEntry("بیرجند", "Birjand", "بيرجند", 32.8663, 59.2211),
+    CityCatalogEntry("بجنورد", "Bojnord", "بجنورد", 37.4747, 57.3291),
+    CityCatalogEntry("سبزوار", "Sabzevar", "سبزوار", 36.2126, 57.6788),
+    CityCatalogEntry("تربت حیدریه", "Torbat-e Heydarieh", "تربت حيدريه", 35.2727, 59.2192),
+    CityCatalogEntry("تربت جام", "Torbat-e Jam", "تربت جام", 35.2439, 60.6231),
+    CityCatalogEntry("قوچان", "Quchan", "قوچان", 37.1064, 58.5100),
+    CityCatalogEntry("کاشمر", "Kashmar", "كاشمر", 35.2394, 58.4658),
+    CityCatalogEntry("گناباد", "Gonabad", "گناباد", 34.3517, 58.6836),
+
+    // --- فارس و جنوب / Fars & the south ---
+    CityCatalogEntry("شیراز", "Shiraz", "شيراز", 29.5918, 52.5837),
+    CityCatalogEntry("بندرعباس", "Bandar Abbas", "بندر عباس", 27.1865, 56.2808),
+    CityCatalogEntry("بوشهر", "Bushehr", "بوشهر", 28.9684, 50.8385),
+    CityCatalogEntry("یاسوج", "Yasuj", "ياسوج", 30.6682, 51.5880),
+    CityCatalogEntry("بندر لنگه", "Bandar Lengeh", "بندر لنگه", 26.5578, 54.8807),
+    CityCatalogEntry("کیش", "Kish Island", "جزيرة كيش", 26.5578, 53.9773),
+    CityCatalogEntry("قشم", "Qeshm", "قشم", 26.9581, 56.2719),
+    CityCatalogEntry("جهرم", "Jahrom", "جهرم", 28.5000, 53.5581),
+    CityCatalogEntry("کازرون", "Kazerun", "كازرون", 29.6194, 51.6536),
+    CityCatalogEntry("مرودشت", "Marvdasht", "مرودشت", 29.8703, 52.8058),
+    CityCatalogEntry("لار", "Lar", "لار", 27.6781, 54.3383),
+    CityCatalogEntry("میناب", "Minab", "ميناب", 27.1467, 57.0800),
+
+    // --- اصفهان و مرکز / Isfahan & central plateau ---
+    CityCatalogEntry("اصفهان", "Isfahan", "أصفهان", 32.6546, 51.6680),
+    CityCatalogEntry("کاشان", "Kashan", "كاشان", 33.9850, 51.4100),
+    CityCatalogEntry("یزد", "Yazd", "يزد", 31.8974, 54.3569),
+    CityCatalogEntry("کرمان", "Kerman", "كرمان", 30.2839, 57.0834),
+    CityCatalogEntry("زاهدان", "Zahedan", "زاهدان", 29.4963, 60.8629),
+    CityCatalogEntry("رفسنجان", "Rafsanjan", "رفسنجان", 30.4067, 55.9938),
+
+    // --- غرب و شمال‌غرب / West & northwest ---
+    CityCatalogEntry("تبریز", "Tabriz", "تبريز", 38.0800, 46.2919),
+    CityCatalogEntry("ارومیه", "Urmia", "أرومية", 37.5527, 45.0761),
+    CityCatalogEntry("اردبیل", "Ardabil", "أردبيل", 38.2498, 48.2933),
+    CityCatalogEntry("زنجان", "Zanjan", "زنجان", 36.6736, 48.4787),
+    CityCatalogEntry("همدان", "Hamadan", "همدان", 34.7992, 48.5146),
+    CityCatalogEntry("کرمانشاه", "Kermanshah", "كرمانشاه", 34.3142, 47.0650),
+    CityCatalogEntry("سنندج", "Sanandaj", "سنندج", 35.3145, 46.9923),
+    CityCatalogEntry("ایلام", "Ilam", "إيلام", 33.6374, 46.4227),
+    CityCatalogEntry("خرم‌آباد", "Khorramabad", "خرم آباد", 33.4870, 48.3557),
+    CityCatalogEntry("شهرکرد", "Shahrekord", "شهركرد", 32.3256, 50.8644),
+    CityCatalogEntry("بروجرد", "Borujerd", "بروجرد", 33.8973, 48.7517),
+    CityCatalogEntry("ملایر", "Malayer", "ملاير", 34.2967, 48.8228),
+    CityCatalogEntry("نهاوند", "Nahavand", "نهاوند", 34.1906, 48.3736),
+    CityCatalogEntry("سقز", "Saqqez", "سقز", 36.2461, 46.2714),
+    CityCatalogEntry("مریوان", "Marivan", "مريوان", 35.5219, 46.1750),
+    CityCatalogEntry("مهاباد", "Mahabad", "مهاباد", 36.7628, 45.7211),
+    CityCatalogEntry("بوکان", "Bukan", "بوكان", 36.5225, 46.2081),
+    CityCatalogEntry("خوی", "Khoy", "خوي", 38.5503, 44.9517),
+    CityCatalogEntry("مرند", "Marand", "مرند", 38.4306, 45.7758),
+    CityCatalogEntry("میانه", "Miyaneh", "ميانه", 37.4272, 47.7156),
+    CityCatalogEntry("پارس‌آباد", "Parsabad", "پارس آباد", 39.6489, 47.9186),
+
+    // --- شمال و دریای خزر / North & the Caspian coast ---
+    CityCatalogEntry("رشت", "Rasht", "رشت", 37.2809, 49.5832),
+    CityCatalogEntry("ساری", "Sari", "ساري", 36.5633, 53.0601),
+    CityCatalogEntry("گرگان", "Gorgan", "جرجان", 36.8386, 54.4341),
+    CityCatalogEntry("بابل", "Babol", "بابل الإيرانية", 36.5513, 52.6789),
+    CityCatalogEntry("آمل", "Amol", "آمل", 36.4696, 52.3512),
+    CityCatalogEntry("چالوس", "Chalus", "جالوس", 36.6550, 51.4200),
+    CityCatalogEntry("بندر انزلی", "Bandar-e Anzali", "بندر أنزلي", 37.4646, 49.4599),
+    CityCatalogEntry("شاهرود", "Shahrud", "شاهرود", 36.4181, 54.9764),
+    CityCatalogEntry("دامغان", "Damghan", "دامغان", 36.1683, 54.3486),
+    CityCatalogEntry("گچساران", "Gachsaran", "گچساران", 30.3592, 50.7981),
+
+    // --- خوزستان و جنوب‌غرب / Khuzestan & southwest ---
+    CityCatalogEntry("اهواز", "Ahvaz", "الأهواز", 31.3183, 48.6706),
+    CityCatalogEntry("آبادان", "Abadan", "عبادان", 30.3392, 48.3043),
+    CityCatalogEntry("دزفول", "Dezful", "دزفول", 32.3814, 48.4058),
+    CityCatalogEntry("شوشتر", "Shushtar", "شوشتر", 32.0447, 48.8558),
+
+    // --- سایر شهرهای ایران (مراکز شهرستان‌ها و شهرهای مهم) / More Iranian cities ---
+    // --- البرز / Alborz ---
+    CityCatalogEntry("نظرآباد", "Nazarabad", "نظرآباد", 35.9520, 50.6070),
+    CityCatalogEntry("طالقان", "Taleqan", "طالقان", 36.1700, 50.7600),
+    CityCatalogEntry("هشتگرد", "Hashtgerd", "هشتگرد", 35.9600, 50.6800),
+    CityCatalogEntry("اشتهارد", "Eshtehard", "اشتهارد", 35.7200, 50.3700),
+    CityCatalogEntry("فردیس", "Fardis", "فرديس", 35.7300, 50.9900),
+    CityCatalogEntry("محمدشهر", "Mohammadshahr", "محمدشهر", 35.8000, 50.9200),
+    CityCatalogEntry("کمال‌شهر", "Kamalshahr", "كمال شهر", 35.8600, 50.8800),
+    CityCatalogEntry("ماهدشت", "Mahdasht", "ماهدشت", 35.7200, 50.8100),
+
+    // --- اردبیل / Ardabil ---
+    CityCatalogEntry("مشگین‌شهر", "Meshgin Shahr", "مشگين شهر", 38.3990, 47.6820),
+    CityCatalogEntry("خلخال", "Khalkhal", "خلخال", 37.6200, 48.5200),
+    CityCatalogEntry("گرمی", "Germi", "گرمي", 39.0300, 48.0800),
+    CityCatalogEntry("بیله‌سوار", "Bileh Savar", "بيله سوار", 39.3700, 48.3500),
+    CityCatalogEntry("نمین", "Namin", "نمين", 38.4300, 48.4800),
+    CityCatalogEntry("نیر", "Nir", "نير", 38.0300, 48.0000),
+    CityCatalogEntry("فیروز (کوثر)", "Firuz (Kowsar)", "فيروز (كوثر)", 37.8400, 48.2000),
+    CityCatalogEntry("سرعین", "Sarein", "سرعين", 38.1500, 48.0800),
+    CityCatalogEntry("اصلاندوز", "Aslanduz", "اصلاندوز", 39.4300, 47.4000),
+
+    // --- آذربایجان شرقی / East Azerbaijan ---
+    CityCatalogEntry("اهر", "Ahar", "اهر", 38.4770, 47.0680),
+    CityCatalogEntry("بناب", "Bonab", "بناب", 37.3400, 46.0560),
+    CityCatalogEntry("مراغه", "Maragheh", "مراغه", 37.3900, 46.2400),
+    CityCatalogEntry("سراب", "Sarab", "سراب", 37.9400, 47.5400),
+    CityCatalogEntry("شبستر", "Shabestar", "شبستر", 38.1800, 45.7000),
+    CityCatalogEntry("هشترود", "Hashtrud", "هشترود", 37.4800, 47.0500),
+    CityCatalogEntry("جلفا", "Jolfa", "جلفا", 38.9400, 45.6300),
+    CityCatalogEntry("کلیبر", "Kaleybar", "كليبر", 38.8700, 47.0400),
+    CityCatalogEntry("ملکان", "Malekan", "ملكان", 37.1400, 46.1000),
+    CityCatalogEntry("اسکو", "Osku", "اسكو", 37.9200, 45.9900),
+    CityCatalogEntry("آذرشهر", "Azarshahr", "آذرشهر", 37.7600, 45.9800),
+    CityCatalogEntry("عجب‌شیر", "Ajabshir", "عجب شير", 37.4800, 45.8900),
+    CityCatalogEntry("ورزقان", "Varzaqan", "ورزقان", 38.5100, 46.6500),
+    CityCatalogEntry("هریس", "Heris", "هريس", 38.2500, 47.1200),
+    CityCatalogEntry("بستان‌آباد", "Bostanabad", "بستان آباد", 37.8500, 46.8400),
+    CityCatalogEntry("ایلخچی", "Ilkhchi", "ايلخچي", 37.9300, 45.9400),
+    CityCatalogEntry("تسوج", "Tasuj", "تسوج", 38.3100, 45.3400),
+    CityCatalogEntry("ترکمانچای", "Torkamanchay", "تركمانچاي", 37.0400, 47.1700),
+
+    // --- آذربایجان غربی / West Azerbaijan ---
+    CityCatalogEntry("سلماس", "Salmas", "سلماس", 38.2000, 44.7700),
+    CityCatalogEntry("پیرانشهر", "Piranshahr", "پيرانشهر", 36.7000, 45.1400),
+    CityCatalogEntry("نقده", "Naqadeh", "نقده", 36.9600, 45.3900),
+    CityCatalogEntry("میاندوآب", "Miandoab", "مياندوآب", 36.9700, 46.1000),
+    CityCatalogEntry("سردشت", "Sardasht", "سردشت", 36.1550, 45.4800),
+    CityCatalogEntry("ماکو", "Maku", "ماكو", 39.2950, 44.5160),
+    CityCatalogEntry("شاهین‌دژ", "Shahin Dezh", "شاهين دژ", 36.6800, 46.5700),
+    CityCatalogEntry("تکاب", "Takab", "تكاب", 36.4000, 47.1100),
+    CityCatalogEntry("اشنویه", "Oshnavieh", "اشنويه", 37.0400, 45.1000),
+    CityCatalogEntry("چالدران", "Chaldoran", "چالدران", 39.0600, 44.3800),
+    CityCatalogEntry("پلدشت", "Poldasht", "پلدشت", 39.3500, 45.0700),
+    CityCatalogEntry("قره‌ضیاءالدین", "Qarah Ziaeddin", "قره ضياءالدين", 38.8900, 45.0000),
+    CityCatalogEntry("شوط", "Showt", "شوط", 39.2200, 44.7700),
+
+    // --- بوشهر / Bushehr ---
+    CityCatalogEntry("برازجان", "Borazjan", "برازجان", 29.2700, 51.2200),
+    CityCatalogEntry("کنگان", "Kangan", "كنگان", 27.8400, 52.0600),
+    CityCatalogEntry("خورموج", "Khormuj", "خورموج", 28.6500, 51.3800),
+    CityCatalogEntry("گناوه", "Genaveh", "گناوه", 29.5800, 50.5200),
+    CityCatalogEntry("دیر", "Deyr", "دير", 27.8400, 51.9400),
+    CityCatalogEntry("دیلم", "Deylam", "ديلم", 30.0600, 50.1600),
+    CityCatalogEntry("جم", "Jam", "جم", 27.8300, 52.3200),
+    CityCatalogEntry("عسلویه", "Asaluyeh", "عسلويه", 27.4700, 52.6100),
+    CityCatalogEntry("اهرم", "Ahram", "اهرم", 28.8800, 51.2700),
+
+    // --- چهارمحال و بختیاری / Chaharmahal & Bakhtiari ---
+    CityCatalogEntry("بروجن", "Borujen", "بروجن", 31.9600, 51.2900),
+    CityCatalogEntry("فارسان", "Farsan", "فارسان", 32.2600, 50.5700),
+    CityCatalogEntry("لردگان", "Lordegan", "لردگان", 31.5100, 50.8200),
+    CityCatalogEntry("اردل", "Ardal", "اردل", 32.1000, 50.6600),
+    CityCatalogEntry("چلگرد (کوهرنگ)", "Chelgerd (Kuhrang)", "چلگرد (كوهرنگ)", 32.4600, 50.1200),
+    CityCatalogEntry("سامان", "Saman", "سامان", 32.4500, 50.9200),
+    CityCatalogEntry("بن", "Ben", "بن", 32.5400, 50.7500),
+
+    // --- فارس / Fars ---
+    CityCatalogEntry("آباده", "Abadeh", "آباده", 31.1600, 52.6500),
+    CityCatalogEntry("اقلید", "Eqlid", "اقليد", 30.9000, 52.6900),
+    CityCatalogEntry("داراب", "Darab", "داراب", 28.7500, 54.5400),
+    CityCatalogEntry("فسا", "Fasa", "فسا", 28.9400, 53.6500),
+    CityCatalogEntry("نی‌ریز", "Neyriz", "ني ريز", 29.2000, 54.3300),
+    CityCatalogEntry("استهبان", "Estahban", "استهبان", 29.1300, 54.0400),
+    CityCatalogEntry("سپیدان", "Sepidan", "سپيدان", 30.2600, 51.9900),
+    CityCatalogEntry("فیروزآباد", "Firuzabad", "فيروزآباد", 28.8400, 52.5700),
+    CityCatalogEntry("نورآباد ممسنی", "Nurabad (Mamasani)", "نورآباد ممسني", 30.1100, 51.5200),
+    CityCatalogEntry("زرین‌دشت", "Zarrin Dasht", "زرين دشت", 28.4300, 54.4000),
+    CityCatalogEntry("سروستان", "Sarvestan", "سروستان", 29.2700, 53.2200),
+    CityCatalogEntry("کوار", "Kavar", "كوار", 29.2000, 52.6900),
+    CityCatalogEntry("لامرد", "Lamerd", "لامرد", 27.3400, 53.1800),
+    CityCatalogEntry("مهر", "Mehr", "مهر", 27.5500, 52.8800),
+    CityCatalogEntry("گراش", "Gerash", "گراش", 27.6700, 54.1400),
+    CityCatalogEntry("خنج", "Khonj", "خنج", 27.8900, 53.4300),
+    CityCatalogEntry("اوز", "Evaz", "اوز", 27.7600, 54.0000),
+    CityCatalogEntry("ارسنجان", "Arsanjan", "ارسنجان", 29.9100, 53.3100),
+    CityCatalogEntry("قیر", "Qir", "قير", 28.4800, 53.0300),
+    CityCatalogEntry("بیضا", "Bayza", "بيضا", 30.1300, 52.4000),
+    CityCatalogEntry("زرقان", "Zarqan", "زرقان", 29.7800, 52.7200),
+    CityCatalogEntry("ایزدخواست", "Izadkhast", "ايزدخواست", 31.5300, 52.1300),
+    CityCatalogEntry("قائمیه", "Qaemiyeh", "قائميه", 29.8400, 51.5500),
+
+    // --- گیلان / Gilan ---
+    CityCatalogEntry("لاهیجان", "Lahijan", "لاهيجان", 37.2070, 50.0030),
+    CityCatalogEntry("لنگرود", "Langarud", "لنگرود", 37.1970, 50.1540),
+    CityCatalogEntry("آستارا", "Astara", "آستارا", 38.4300, 48.8700),
+    CityCatalogEntry("هشتپر (تالش)", "Hashtpar (Talesh)", "هشتپر (تالش)", 37.8000, 48.9000),
+    CityCatalogEntry("رودسر", "Rudsar", "رودسر", 37.1380, 50.2900),
+    CityCatalogEntry("صومعه‌سرا", "Sowme'eh Sara", "صومعه سرا", 37.3100, 49.3200),
+    CityCatalogEntry("فومن", "Fuman", "فومن", 37.2200, 49.3100),
+    CityCatalogEntry("آستانه اشرفیه", "Astaneh-ye Ashrafiyeh", "آستانه اشرفيه", 37.2600, 49.9500),
+    CityCatalogEntry("رودبار", "Rudbar", "رودبار", 36.8200, 49.4200),
+    CityCatalogEntry("منجیل", "Manjil", "منجيل", 36.7400, 49.4000),
+    CityCatalogEntry("ماسال", "Masal", "ماسال", 37.3600, 49.1300),
+    CityCatalogEntry("شفت", "Shaft", "شفت", 37.1700, 49.4000),
+    CityCatalogEntry("سیاهکل", "Siahkal", "سياهكل", 37.1500, 49.8700),
+    CityCatalogEntry("املش", "Amlash", "املش", 37.0900, 50.1700),
+    CityCatalogEntry("رضوانشهر", "Rezvanshahr", "رضوانشهر", 37.5500, 49.1400),
+    CityCatalogEntry("خمام", "Khomam", "خمام", 37.3900, 49.6400),
+
+    // --- گلستان / Golestan ---
+    CityCatalogEntry("گنبد کاووس", "Gonbad-e Kavus", "گنبد كاووس", 37.2500, 55.1700),
+    CityCatalogEntry("علی‌آباد کتول", "Aliabad-e Katul", "علي آباد كتول", 36.9100, 54.8700),
+    CityCatalogEntry("آق‌قلا", "Aq Qala", "آق قلا", 37.0100, 54.4500),
+    CityCatalogEntry("بندر ترکمن", "Bandar Torkaman", "بندر تركمن", 36.9000, 54.0700),
+    CityCatalogEntry("کردکوی", "Kordkuy", "كردكوي", 36.7900, 54.1100),
+    CityCatalogEntry("بندر گز", "Bandar Gaz", "بندر گز", 36.7700, 53.9500),
+    CityCatalogEntry("مینودشت", "Minudasht", "مينودشت", 37.2300, 55.3700),
+    CityCatalogEntry("آزادشهر", "Azadshahr", "آزادشهر", 37.0900, 55.1700),
+    CityCatalogEntry("رامیان", "Ramian", "راميان", 37.0100, 55.1500),
+    CityCatalogEntry("کلاله", "Kalaleh", "كلاله", 37.3800, 55.4900),
+    CityCatalogEntry("مراوه‌تپه", "Maraveh Tappeh", "مراوه تپه", 37.9000, 55.9500),
+    CityCatalogEntry("گمیشان", "Gomishan", "گميشان", 37.0700, 54.0800),
+
+    // --- همدان / Hamadan ---
+    CityCatalogEntry("تویسرکان", "Tuyserkan", "تويسركان", 34.5500, 48.4500),
+    CityCatalogEntry("اسدآباد", "Asadabad", "اسدآباد", 34.7800, 48.1200),
+    CityCatalogEntry("کبودرآهنگ", "Kabudarahang", "كبودرآهنگ", 35.2100, 48.7200),
+    CityCatalogEntry("رزن", "Razan", "رزن", 35.3900, 49.0300),
+    CityCatalogEntry("بهار", "Bahar", "بهار", 34.9100, 48.4400),
+    CityCatalogEntry("فامنین", "Famenin", "فامنين", 35.1200, 48.9100),
+
+    // --- هرمزگان / Hormozgan ---
+    CityCatalogEntry("جاسک", "Jask", "جاسك", 25.6400, 57.7700),
+    CityCatalogEntry("حاجی‌آباد", "Hajiabad", "حاجي آباد", 28.3100, 55.9000),
+    CityCatalogEntry("بستک", "Bastak", "بستك", 27.2000, 54.3700),
+    CityCatalogEntry("پارسیان", "Parsian", "پارسيان", 27.2100, 53.0300),
+    CityCatalogEntry("رودان", "Rudan", "رودان", 27.4400, 57.1900),
+    CityCatalogEntry("بندر خمیر", "Bandar Khamir", "بندر خمير", 26.9500, 55.5900),
+    CityCatalogEntry("ابوموسی", "Abu Musa", "ابوموسي", 25.8700, 55.0300),
+    CityCatalogEntry("سیریک", "Sirik", "سيريك", 26.5200, 57.1000),
+    CityCatalogEntry("هرمز", "Hormuz", "هرمز", 27.0600, 56.4600),
+
+    // --- ایلام / Ilam ---
+    CityCatalogEntry("دهلران", "Dehloran", "دهلران", 32.6900, 47.2700),
+    CityCatalogEntry("مهران", "Mehran", "مهران", 33.1200, 46.1600),
+    CityCatalogEntry("ایوان", "Eyvan", "ايوان", 33.8300, 46.3100),
+    CityCatalogEntry("آبدانان", "Abdanan", "آبدانان", 32.9900, 47.4200),
+    CityCatalogEntry("دره‌شهر", "Darreh Shahr", "دره شهر", 33.1400, 47.3700),
+    CityCatalogEntry("سرابله", "Sarableh", "سرابله", 33.7700, 46.5700),
+
+    // --- اصفهان / Isfahan ---
+    CityCatalogEntry("نجف‌آباد", "Najafabad", "نجف آباد", 32.6300, 51.3700),
+    CityCatalogEntry("خمینی‌شهر", "Khomeyni Shahr", "خميني شهر", 32.6800, 51.5200),
+    CityCatalogEntry("شاهین‌شهر", "Shahin Shahr", "شاهين شهر", 32.8600, 51.5500),
+    CityCatalogEntry("فلاورجان", "Falavarjan", "فلاورجان", 32.5600, 51.5100),
+    CityCatalogEntry("مبارکه", "Mobarakeh", "مباركه", 32.3500, 51.5000),
+    CityCatalogEntry("زرین‌شهر", "Zarrin Shahr", "زرين شهر", 32.3800, 51.3800),
+    CityCatalogEntry("گلپایگان", "Golpayegan", "گلپايگان", 33.4500, 50.2900),
+    CityCatalogEntry("خوانسار", "Khansar", "خوانسار", 33.2200, 50.3200),
+    CityCatalogEntry("نطنز", "Natanz", "نطنز", 33.5100, 51.9200),
+    CityCatalogEntry("اردستان", "Ardestan", "اردستان", 33.3800, 52.3700),
+    CityCatalogEntry("سمیرم", "Semirom", "سميرم", 31.4100, 51.5700),
+    CityCatalogEntry("داران", "Daran", "داران", 32.9900, 50.4100),
+    CityCatalogEntry("فریدونشهر", "Fereydunshahr", "فريدونشهر", 32.9400, 50.1200),
+    CityCatalogEntry("چادگان", "Chadegan", "چادگان", 32.7700, 50.6400),
+    CityCatalogEntry("دهاقان", "Dehaqan", "دهاقان", 31.9400, 51.6500),
+    CityCatalogEntry("شهرضا", "Shahreza", "شهرضا", 32.0100, 51.8700),
+    CityCatalogEntry("تیران", "Tiran", "تيران", 32.7000, 51.1500),
+    CityCatalogEntry("آران و بیدگل", "Aran va Bidgol", "آران و بيدگل", 34.0600, 51.4800),
+    CityCatalogEntry("نایین", "Nain", "نايين", 32.8600, 53.0900),
+    CityCatalogEntry("خور", "Khur", "خور", 33.7800, 55.0800),
+    CityCatalogEntry("فولادشهر", "Fuladshahr", "فولادشهر", 32.4800, 51.4200),
+
+    // --- کرمان / Kerman ---
+    CityCatalogEntry("سیرجان", "Sirjan", "سيرجان", 29.4500, 55.6800),
+    CityCatalogEntry("بم", "Bam", "بم", 29.1100, 58.3600),
+    CityCatalogEntry("جیرفت", "Jiroft", "جيرفت", 28.6700, 57.7400),
+    CityCatalogEntry("زرند", "Zarand", "زرند", 30.8100, 56.5700),
+    CityCatalogEntry("کهنوج", "Kahnuj", "كهنوج", 27.9500, 57.7000),
+    CityCatalogEntry("بردسیر", "Bardsir", "بردسير", 29.9200, 56.5700),
+    CityCatalogEntry("شهربابک", "Shahr-e Babak", "شهربابك", 30.1200, 55.1200),
+    CityCatalogEntry("راور", "Ravar", "راور", 31.2700, 56.8000),
+    CityCatalogEntry("ریگان", "Rigan", "ريگان", 28.6600, 59.1200),
+    CityCatalogEntry("فهرج", "Fahraj", "فهرج", 28.9500, 58.8900),
+    CityCatalogEntry("عنبرآباد", "Anbarabad", "عنبرآباد", 28.4700, 57.8500),
+    CityCatalogEntry("منوجان", "Manujan", "منوجان", 27.4100, 57.5000),
+    CityCatalogEntry("قلعه‌گنج", "Qaleh Ganj", "قلعه گنج", 27.5200, 57.8700),
+    CityCatalogEntry("رابر", "Rabor", "رابر", 29.2900, 56.9100),
+    CityCatalogEntry("کوهبنان", "Kuhbanan", "كوهبنان", 31.4100, 56.2800),
+    CityCatalogEntry("انار", "Anar", "انار", 30.8800, 55.2800),
+    CityCatalogEntry("بافت", "Baft", "بافت", 29.2300, 56.6000),
+    CityCatalogEntry("گلباف", "Golbaf", "گلباف", 29.8800, 57.7300),
+    CityCatalogEntry("ماهان", "Mahan", "ماهان", 30.0700, 57.2900),
+
+    // --- کرمانشاه / Kermanshah ---
+    CityCatalogEntry("اسلام‌آباد غرب", "Islamabad-e Gharb", "اسلام آباد غرب", 34.1100, 46.5300),
+    CityCatalogEntry("قصر شیرین", "Qasr-e Shirin", "قصر شيرين", 34.5100, 45.5800),
+    CityCatalogEntry("سرپل ذهاب", "Sarpol-e Zahab", "سرپل ذهاب", 34.4600, 45.8600),
+    CityCatalogEntry("پاوه", "Paveh", "پاوه", 35.0400, 46.3600),
+    CityCatalogEntry("جوانرود", "Javanrud", "جوانرود", 34.8000, 46.4900),
+    CityCatalogEntry("سنقر", "Sonqor", "سنقر", 34.7800, 47.6000),
+    CityCatalogEntry("کنگاور", "Kangavar", "كنگاور", 34.5000, 47.9700),
+    CityCatalogEntry("صحنه", "Sahneh", "صحنه", 34.4800, 47.6900),
+    CityCatalogEntry("هرسین", "Harsin", "هرسين", 34.2700, 47.5800),
+    CityCatalogEntry("گیلان غرب", "Gilan-e Gharb", "گيلان غرب", 34.1400, 45.9200),
+    CityCatalogEntry("روانسر", "Ravansar", "روانسر", 34.7200, 46.6500),
+    CityCatalogEntry("کرند غرب", "Karand-e Gharb", "كرند غرب", 34.2800, 46.2400),
+
+    // --- خراسان شمالی / North Khorasan ---
+    CityCatalogEntry("شیروان", "Shirvan", "شيروان", 37.4100, 57.9300),
+    CityCatalogEntry("اسفراین", "Esfarayen", "اسفراين", 37.0700, 57.5100),
+    CityCatalogEntry("جاجرم", "Jajarm", "جاجرم", 36.9500, 56.3800),
+    CityCatalogEntry("فاروج", "Faruj", "فاروج", 37.2300, 58.2200),
+    CityCatalogEntry("آشخانه", "Ashkhaneh", "آشخانه", 37.5600, 56.9300),
+
+    // --- خراسان جنوبی / South Khorasan ---
+    CityCatalogEntry("قائن", "Qaen", "قائن", 33.7300, 59.1800),
+    CityCatalogEntry("فردوس", "Ferdows", "فردوس", 34.0200, 58.1700),
+    CityCatalogEntry("نهبندان", "Nehbandan", "نهبندان", 31.5400, 60.0300),
+    CityCatalogEntry("سرایان", "Sarayan", "سرايان", 33.8600, 58.5200),
+    CityCatalogEntry("طبس", "Tabas", "طبس", 33.6000, 56.9200),
+    CityCatalogEntry("بشرویه", "Boshruyeh", "بشرويه", 33.8700, 57.4300),
+    CityCatalogEntry("سربیشه", "Sarbisheh", "سربيشه", 32.5800, 59.8000),
+    CityCatalogEntry("خوسف", "Khusf", "خوسف", 32.7800, 58.8900),
+
+    // --- خراسان رضوی / Razavi Khorasan ---
+    CityCatalogEntry("تایباد", "Taybad", "تايباد", 34.7400, 60.7800),
+    CityCatalogEntry("خواف", "Khaf", "خواف", 34.5800, 60.1400),
+    CityCatalogEntry("سرخس", "Sarakhs", "سرخس", 36.5400, 61.1600),
+    CityCatalogEntry("چناران", "Chenaran", "چناران", 36.6400, 59.1200),
+    CityCatalogEntry("درگز", "Dargaz", "درگز", 37.4500, 59.1100),
+    CityCatalogEntry("فریمان", "Fariman", "فريمان", 35.7000, 59.8500),
+    CityCatalogEntry("کلات", "Kalat", "كلات", 37.0300, 59.7600),
+    CityCatalogEntry("بردسکن", "Bardaskan", "بردسكن", 35.2600, 57.9700),
+    CityCatalogEntry("رشتخوار", "Roshtkhar", "رشتخوار", 34.9700, 59.6200),
+    CityCatalogEntry("بجستان", "Bajestan", "بجستان", 34.5200, 58.1800),
+    CityCatalogEntry("جغتای", "Joghatai", "جغتاي", 36.6200, 57.2500),
+    CityCatalogEntry("خلیل‌آباد", "Khalilabad", "خليل آباد", 35.2600, 58.2800),
+
+    // --- خوزستان / Khuzestan ---
+    CityCatalogEntry("ماهشهر", "Mahshahr", "ماهشهر", 30.5600, 49.1900),
+    CityCatalogEntry("بندر امام خمینی", "Bandar-e Emam Khomeyni", "بندر امام خميني", 30.4300, 49.0800),
+    CityCatalogEntry("بهبهان", "Behbahan", "بهبهان", 30.6000, 50.2400),
+    CityCatalogEntry("ایذه", "Izeh", "ايذه", 31.8300, 49.8700),
+    CityCatalogEntry("مسجدسلیمان", "Masjed Soleyman", "مسجدسليمان", 31.9400, 49.3000),
+    CityCatalogEntry("رامهرمز", "Ramhormoz", "رامهرمز", 31.2800, 49.6000),
+    CityCatalogEntry("رامشیر", "Ramshir", "رامشير", 30.8900, 49.4100),
+    CityCatalogEntry("اندیمشک", "Andimeshk", "انديمشك", 32.4600, 48.3600),
+    CityCatalogEntry("شوش", "Shush", "شوش", 32.1900, 48.2400),
+    CityCatalogEntry("خرمشهر", "Khorramshahr", "خرمشهر", 30.4300, 48.1800),
+    CityCatalogEntry("هندیجان", "Hendijan", "هنديجان", 30.2400, 49.7200),
+    CityCatalogEntry("شادگان", "Shadegan", "شادگان", 30.6500, 48.6600),
+    CityCatalogEntry("هویزه", "Hoveyzeh", "هويزه", 31.4600, 48.0700),
+    CityCatalogEntry("سوسنگرد", "Susangerd", "سوسنگرد", 31.5600, 48.1800),
+    CityCatalogEntry("باغ‌ملک", "Bagh-e Malek", "باغ ملك", 31.5200, 49.8900),
+    CityCatalogEntry("لالی", "Lali", "لالي", 32.3400, 49.0900),
+    CityCatalogEntry("امیدیه", "Omidiyeh", "اميديه", 30.7500, 49.7000),
+    CityCatalogEntry("آغاجاری", "Aghajari", "آغاجاري", 30.7500, 49.8500),
+    CityCatalogEntry("ملاثانی", "Mollasani", "ملاثاني", 31.5700, 48.8800),
+    CityCatalogEntry("حمیدیه", "Hamidiyeh", "حميديه", 31.4800, 48.4300),
+    CityCatalogEntry("گتوند", "Gotvand", "گتوند", 32.2500, 48.8200),
+
+    // --- کهگیلویه و بویراحمد / Kohgiluyeh & Boyer-Ahmad ---
+    CityCatalogEntry("دهدشت", "Dehdasht", "دهدشت", 30.7900, 50.5700),
+    CityCatalogEntry("سی‌سخت", "Sisakht", "سي سخت", 30.8700, 51.4500),
+    CityCatalogEntry("باشت", "Basht", "باشت", 30.3600, 51.1500),
+
+    // --- کردستان / Kurdistan ---
+    CityCatalogEntry("بانه", "Baneh", "بانه", 35.9900, 45.8900),
+    CityCatalogEntry("قروه", "Qorveh", "قروه", 35.1700, 47.8000),
+    CityCatalogEntry("دیواندره", "Divandarreh", "ديواندره", 35.9100, 47.0200),
+    CityCatalogEntry("بیجار", "Bijar", "بيجار", 35.8700, 47.6000),
+    CityCatalogEntry("کامیاران", "Kamyaran", "كامياران", 34.8000, 46.9300),
+    CityCatalogEntry("سروآباد", "Sarvabad", "سروآباد", 35.3100, 46.3500),
+    CityCatalogEntry("دهگلان", "Dehgolan", "دهگلان", 35.2800, 47.4200),
+
+    // --- لرستان / Lorestan ---
+    CityCatalogEntry("دورود", "Dorud", "دورود", 33.4900, 49.0600),
+    CityCatalogEntry("الیگودرز", "Aligudarz", "اليگودرز", 33.4000, 49.6900),
+    CityCatalogEntry("ازنا", "Azna", "ازنا", 33.4600, 49.4600),
+    CityCatalogEntry("کوهدشت", "Kuhdasht", "كوهدشت", 33.5300, 47.6100),
+    CityCatalogEntry("پلدختر", "Poldokhtar", "پلدختر", 33.1500, 47.7200),
+    CityCatalogEntry("نورآباد (دلفان)", "Nurabad (Delfan)", "نورآباد (دلفان)", 34.0700, 47.9700),
+    CityCatalogEntry("الشتر", "Aleshtar", "الشتر", 34.0000, 48.2600),
+
+    // --- مرکزی / Markazi ---
+    CityCatalogEntry("ساوه", "Saveh", "ساوه", 35.0200, 50.3600),
+    CityCatalogEntry("خمین", "Khomein", "خمين", 33.6400, 50.0800),
+    CityCatalogEntry("محلات", "Mahallat", "محلات", 33.9100, 50.4500),
+    CityCatalogEntry("دلیجان", "Delijan", "دليجان", 33.9900, 50.6800),
+    CityCatalogEntry("شازند", "Shazand", "شازند", 33.9300, 49.4100),
+    CityCatalogEntry("تفرش", "Tafresh", "تفرش", 34.6900, 50.0100),
+    CityCatalogEntry("آشتیان", "Ashtian", "آشتيان", 34.5200, 50.0000),
+
+    // --- مازندران / Mazandaran ---
+    CityCatalogEntry("قائم‌شهر", "Qaem Shahr", "قائم شهر", 36.4600, 52.8600),
+    CityCatalogEntry("تنکابن", "Tonekabon", "تنكابن", 36.8200, 50.8700),
+    CityCatalogEntry("رامسر", "Ramsar", "رامسر", 36.9000, 50.6500),
+    CityCatalogEntry("نوشهر", "Nowshahr", "نوشهر", 36.6500, 51.5000),
+    CityCatalogEntry("بهشهر", "Behshahr", "بهشهر", 36.6900, 53.5500),
+    CityCatalogEntry("نکا", "Neka", "نكا", 36.6500, 53.3000),
+    CityCatalogEntry("محمودآباد", "Mahmudabad", "محمودآباد", 36.6300, 52.2600),
+    CityCatalogEntry("فریدونکنار", "Fereydunkenar", "فريدونكنار", 36.6800, 52.5200),
+    CityCatalogEntry("جویبار", "Juybar", "جويبار", 36.6400, 52.9100),
+    CityCatalogEntry("نور", "Nur", "نور", 36.5700, 52.0100),
+    CityCatalogEntry("کلاردشت", "Kelardasht", "كلاردشت", 36.5100, 51.1500),
+    CityCatalogEntry("بابلسر", "Babolsar", "بابلسر", 36.7000, 52.6500),
+    CityCatalogEntry("گلوگاه", "Galugah", "گلوگاه", 36.7300, 53.8100),
+
+    // --- قزوین / Qazvin ---
+    CityCatalogEntry("تاکستان", "Takestan", "تاكستان", 36.0700, 49.7000),
+    CityCatalogEntry("بوئین‌زهرا", "Buin Zahra", "بوئين زهرا", 35.7700, 50.0500),
+    CityCatalogEntry("آبیک", "Abyek", "آبيك", 36.0400, 50.5300),
+    CityCatalogEntry("آوج", "Avaj", "آوج", 35.5700, 49.2200),
+
+    // --- سمنان / Semnan ---
+    CityCatalogEntry("گرمسار", "Garmsar", "گرمسار", 35.2200, 52.3400),
+    CityCatalogEntry("مهدی‌شهر", "Mahdishahr", "مهدي شهر", 35.7000, 53.3500),
+    CityCatalogEntry("ایوانکی", "Eyvanaki", "ايوانكي", 35.3400, 52.0600),
+    CityCatalogEntry("آرادان", "Aradan", "آرادان", 35.2500, 52.4900),
+    CityCatalogEntry("بسطام", "Bastam", "بسطام", 36.4800, 54.9900),
+    CityCatalogEntry("سرخه", "Sorkheh", "سرخه", 35.4600, 53.2100),
+
+    // --- سیستان و بلوچستان / Sistan & Baluchestan ---
+    CityCatalogEntry("چابهار", "Chabahar", "چابهار", 25.2900, 60.6400),
+    CityCatalogEntry("ایرانشهر", "Iranshahr", "ايرانشهر", 27.2000, 60.6900),
+    CityCatalogEntry("سراوان", "Saravan", "سراوان", 27.3700, 62.3300),
+    CityCatalogEntry("زابل", "Zabol", "زابل", 31.0300, 61.5000),
+    CityCatalogEntry("خاش", "Khash", "خاش", 28.2200, 61.2100),
+    CityCatalogEntry("کنارک", "Konarak", "كنارك", 25.3600, 60.3800),
+    CityCatalogEntry("سرباز", "Sarbaz", "سرباز", 26.6300, 61.2600),
+    CityCatalogEntry("نیک‌شهر", "Nikshahr", "نيك شهر", 26.2300, 60.2100),
+    CityCatalogEntry("زهک", "Zahak", "زهك", 30.8900, 61.6800),
+    CityCatalogEntry("میرجاوه", "Mirjaveh", "ميرجاوه", 29.0000, 61.4500),
+    CityCatalogEntry("راسک", "Rask", "راسك", 26.2300, 61.4000),
+    CityCatalogEntry("فنوج", "Fanuj", "فنوج", 26.5800, 59.6300),
+    CityCatalogEntry("بمپور", "Bampur", "بمپور", 27.1900, 60.4600),
+
+    // --- تهران / Tehran ---
+    CityCatalogEntry("شهریار", "Shahriar", "شهريار", 35.6600, 51.0600),
+    CityCatalogEntry("اسلامشهر", "Eslamshahr", "اسلامشهر", 35.5500, 51.2300),
+    CityCatalogEntry("ری", "Rey", "ري", 35.5900, 51.4300),
+    CityCatalogEntry("ورامین", "Varamin", "ورامين", 35.3200, 51.6500),
+    CityCatalogEntry("پاکدشت", "Pakdasht", "پاكدشت", 35.4700, 51.6800),
+    CityCatalogEntry("شهر قدس", "Qods", "شهر قدس", 35.7200, 51.1100),
+    CityCatalogEntry("ملارد", "Malard", "ملارد", 35.6700, 50.9800),
+    CityCatalogEntry("دماوند", "Damavand", "دماوند", 35.7200, 52.0700),
+    CityCatalogEntry("فیروزکوه", "Firuzkuh", "فيروزكوه", 35.7600, 52.7800),
+    CityCatalogEntry("پردیس", "Pardis", "پرديس", 35.7400, 51.7700),
+    CityCatalogEntry("رباط‌کریم", "Robat Karim", "رباط كريم", 35.4800, 51.0800),
+    CityCatalogEntry("قرچک", "Qarchak", "قرچك", 35.4300, 51.5700),
+    CityCatalogEntry("نسیم‌شهر", "Nasimshahr", "نسيم شهر", 35.5700, 51.1600),
+    CityCatalogEntry("پیشوا", "Pishva", "پيشوا", 35.3000, 51.7300),
+    CityCatalogEntry("بومهن", "Bumehen", "بومهن", 35.7300, 51.8700),
+    CityCatalogEntry("رودهن", "Rudehen", "رودهن", 35.7400, 51.9100),
+    CityCatalogEntry("لواسان", "Lavasan", "لواسان", 35.8000, 51.6400),
+    CityCatalogEntry("تجریش (شمیرانات)", "Tajrish (Shemiranat)", "تجريش (شميرانات)", 35.8000, 51.4300),
+    CityCatalogEntry("کهریزک", "Kahrizak", "كهريزك", 35.5200, 51.3700),
+
+    // --- یزد / Yazd ---
+    CityCatalogEntry("میبد", "Meybod", "ميبد", 32.2500, 54.0200),
+    CityCatalogEntry("اردکان", "Ardakan", "اردكان", 32.3100, 54.0200),
+    CityCatalogEntry("بافق", "Bafq", "بافق", 31.6000, 55.4000),
+    CityCatalogEntry("ابرکوه", "Abarkuh", "ابركوه", 31.1300, 53.2800),
+    CityCatalogEntry("تفت", "Taft", "تفت", 31.7500, 54.2100),
+    CityCatalogEntry("مهریز", "Mehriz", "مهريز", 31.5900, 54.4300),
+
+    // --- زنجان / Zanjan ---
+    CityCatalogEntry("ابهر", "Abhar", "ابهر", 36.1500, 49.2200),
+    CityCatalogEntry("خرمدره", "Khorramdarreh", "خرمدره", 36.2000, 49.1900),
+    CityCatalogEntry("ماهنشان", "Mahneshan", "ماهنشان", 36.7400, 47.6700),
+    CityCatalogEntry("سلطانیه", "Soltaniyeh", "سلطانيه", 36.4300, 48.8000),
+
+    // --- شهرهای مهم جهان / Major world cities ---
+    CityCatalogEntry("استانبول", "Istanbul", "إسطنبول", 41.0082, 28.9784),
+    CityCatalogEntry("آنکارا", "Ankara", "أنقرة", 39.9334, 32.8597),
+    CityCatalogEntry("قاهره", "Cairo", "القاهرة", 30.0444, 31.2357),
+    CityCatalogEntry("کراچی", "Karachi", "كراتشي", 24.8607, 67.0011),
+    CityCatalogEntry("لاهور", "Lahore", "لاهور", 31.5497, 74.3436),
+    CityCatalogEntry("اسلام‌آباد", "Islamabad", "إسلام آباد", 33.6844, 73.0479),
+    CityCatalogEntry("کابل", "Kabul", "كابل", 34.5553, 69.2075),
+    CityCatalogEntry("دبی", "Dubai", "دبي", 25.2048, 55.2708),
+    CityCatalogEntry("ابوظبی", "Abu Dhabi", "أبوظبي", 24.4539, 54.3773),
+    CityCatalogEntry("دوحه", "Doha", "الدوحة", 25.2854, 51.5310),
+    CityCatalogEntry("منامه", "Manama", "المنامة", 26.2285, 50.5860),
+    CityCatalogEntry("کویت", "Kuwait City", "مدينة الكويت", 29.3759, 47.9774),
+    CityCatalogEntry("مسقط", "Muscat", "مسقط", 23.5880, 58.3829),
+    CityCatalogEntry("ریاض", "Riyadh", "الرياض", 24.7136, 46.6753),
+    CityCatalogEntry("جده", "Jeddah", "جدة", 21.4858, 39.1925),
+    CityCatalogEntry("عمان (اردن)", "Amman", "عمّان", 31.9454, 35.9284),
+    CityCatalogEntry("صنعا", "Sanaa", "صنعاء", 15.3694, 44.1910),
+    CityCatalogEntry("خارطوم", "Khartoum", "الخرطوم", 15.5007, 32.5599),
+    CityCatalogEntry("جاکارتا", "Jakarta", "جاكرتا", -6.2088, 106.8456),
+    CityCatalogEntry("کوالالامپور", "Kuala Lumpur", "كوالالمبور", 3.1390, 101.6869),
+    CityCatalogEntry("داکا", "Dhaka", "دكا", 23.8103, 90.4125),
+    CityCatalogEntry("دهلی نو", "New Delhi", "نيودلهي", 28.6139, 77.2090),
+    CityCatalogEntry("لندن", "London", "لندن", 51.5074, -0.1278),
+    CityCatalogEntry("پاریس", "Paris", "باريس", 48.8566, 2.3522),
+    CityCatalogEntry("برلین", "Berlin", "برلين", 52.5200, 13.4050),
+    CityCatalogEntry("مسکو", "Moscow", "موسكو", 55.7558, 37.6173),
+    CityCatalogEntry("نیویورک", "New York", "نيويورك", 40.7128, -74.0060),
+    CityCatalogEntry("تورنتو", "Toronto", "تورونتو", 43.6532, -79.3832),
+    CityCatalogEntry("سیدنی", "Sydney", "سيدني", -33.8688, 151.2093),
+
+    // --- شمال آفریقا / North Africa ---
+    CityCatalogEntry("اسکندریه", "Alexandria", "الإسكندرية", 31.2001, 29.9187),
+    CityCatalogEntry("طرابلس (لیبی)", "Tripoli", "طرابلس", 32.8872, 13.1913),
+    CityCatalogEntry("تونس", "Tunis", "تونس", 36.8065, 10.1815),
+    CityCatalogEntry("الجزیره", "Algiers", "الجزائر", 36.7538, 3.0588),
+    CityCatalogEntry("رباط", "Rabat", "الرباط", 34.0209, -6.8416),
+    CityCatalogEntry("کازابلانکا", "Casablanca", "الدار البيضاء", 33.5731, -7.5898),
+
+    // --- آسیای میانه و قفقاز / Central Asia & the Caucasus ---
+    CityCatalogEntry("باکو", "Baku", "باكو", 40.4093, 49.8671),
+    CityCatalogEntry("دوشنبه", "Dushanbe", "دوشنبه", 38.5598, 68.7870),
+    CityCatalogEntry("تاشکند", "Tashkent", "طشقند", 41.2995, 69.2401),
+    CityCatalogEntry("اشگاباد", "Ashgabat", "عشق آباد", 37.9601, 58.3261),
+    CityCatalogEntry("بیشکک", "Bishkek", "بيشكك", 42.8746, 74.5698),
+    CityCatalogEntry("گروزنی", "Grozny", "غروزني", 43.3169, 45.6981),
+    CityCatalogEntry("سرینه‌وو", "Sarajevo", "سراييفو", 43.8563, 18.4131),
+
+    // --- جنوب و جنوب‌شرق آسیا / South & Southeast Asia ---
+    CityCatalogEntry("مالِه", "Malé", "ماليه", 4.1755, 73.5093),
+    CityCatalogEntry("سنگاپور", "Singapore", "سنغافورة", 1.3521, 103.8198),
+    CityCatalogEntry("بمبئی (مومبای)", "Mumbai", "مومباي", 19.0760, 72.8777),
+    CityCatalogEntry("حیدرآباد (هند)", "Hyderabad", "حيدر أباد", 17.3850, 78.4867),
+
+    // --- شهرهای مهم دیگر جهان / A few more world hubs ---
+    CityCatalogEntry("لس‌آنجلس", "Los Angeles", "لوس أنجلوس", 34.0522, -118.2437),
+    CityCatalogEntry("شیکاگو", "Chicago", "شيكاغو", 41.8781, -87.6298),
+    CityCatalogEntry("وین", "Vienna", "فيينا", 48.2082, 16.3738),
+    CityCatalogEntry("هامبورگ", "Hamburg", "هامبورغ", 53.5511, 9.9937),
+    CityCatalogEntry("مادرید", "Madrid", "مدريد", 40.4168, -3.7038),
+    CityCatalogEntry("رم", "Rome", "روما", 41.9028, 12.4964),
+    CityCatalogEntry("ژوهانسبورگ", "Johannesburg", "جوهانسبرغ", -26.2041, 28.0473)
+)
