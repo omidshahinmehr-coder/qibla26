@@ -1,6 +1,7 @@
 package com.qibla.prayertimes.ui
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -52,6 +53,7 @@ import kotlinx.coroutines.launch
  * shrine instead of the Kaaba. The distance to every shrine from the currently selected city is
  * listed at the bottom.
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ShrineDirectionScreen(viewModel: QiblaViewModel, onBack: () -> Unit) {
     val city by viewModel.selectedCity.collectAsState()
