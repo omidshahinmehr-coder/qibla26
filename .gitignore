@@ -1,1 +1,28 @@
 
+# Build outputs
+*/build/
+build/
+.gradle/
+
+# Local configuration (machine-specific SDK path — never commit this)
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+.DS_Store
+
+# Signing (never commit real keystores or passwords)
+*.jks
+*.keystore
+keystore.properties
+# Exception: this repo's fixed *debug*-only keystore (fixed, publicly-known password, never
+# used for release builds) is intentionally committed so every build — local or CI — produces
+# an identically-signed debug APK that can be installed as an update over the last one. See the
+# signingConfigs block in app/build.gradle.kts and wear/build.gradle.kts.
+!/debug.keystore
+
+# Captures & profiling
+captures/
+.externalNativeBuild/
+.cxx/
