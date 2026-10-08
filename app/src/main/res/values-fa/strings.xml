@@ -170,18 +170,18 @@
     <string name="shrine_measured_from">محاسبه از: %1$s</string>
     <string name="shrine_all_distances">فاصله تا همه حرم‌ها</string>
     <string name="shrine_swipe_hint">برای انتخاب حرم، تصویر را به چپ یا راست بکشید</string>
-    <string name="shrine_najaf_name">حرم امیرالمؤمنین امام علی (ع)</string>
+    <string name="shrine_najaf_name">حرم امیرالمؤمنین امام علی علیه السلام</string>
     <string name="shrine_najaf_city">نجف اشرف</string>
-    <string name="shrine_karbala_name">حرم امام حسین (ع)</string>
+    <string name="shrine_karbala_name">حرم امام حسین علیه السلام</string>
     <string name="shrine_karbala_city">کربلای معلی</string>
-    <string name="shrine_kadhimiya_name">حرم امام کاظم و امام جواد (ع)</string>
+    <string name="shrine_kadhimiya_name">حرم امام کاظم و امام جواد علیه السلام</string>
     <string name="shrine_kadhimiya_city">کاظمین، بغداد</string>
-    <string name="shrine_samarra_name">حرم امام هادی و امام حسن عسکری (ع)</string>
+    <string name="shrine_samarra_name">حرم امام هادی و امام حسن عسکری علیه السلام</string>
     <string name="shrine_samarra_city">سامرا</string>
-    <string name="shrine_mashhad_name">حرم امام رضا (ع)</string>
+    <string name="shrine_mashhad_name">حرم امام رضا علیه السلام</string>
     <string name="shrine_mashhad_city">مشهد مقدس</string>
-    <string name="shrine_nabawi_name">مسجدالنبی (ص)</string>
+    <string name="shrine_nabawi_name">حرم رسول خدا صلی الله  علیه و آله و قبور ائمه بقیع علیهم السلام</string>
     <string name="shrine_nabawi_city">مدینه منوره</string>
-    <string name="shrine_zaynab_name">حرم حضرت زینب (س)</string>
+    <string name="shrine_zaynab_name">حرم حضرت زینب سلام الله علیها</string>
     <string name="shrine_zaynab_city">دمشق</string>
 </resources>
