@@ -179,7 +179,7 @@
     <string name="prayer_method_jafari_desc">Fajr 16°, Isha 14°, Maghrib 4° after sunset — the convention used in Shia jurisprudence.</string>
     <string name="next_prayer_countdown">%1$s in %2$s</string>
     <string name="fullscreen_banner">To show the adhan screen over the lock screen, allow "full-screen notifications" for this app in Android settings.</string>
-    <string name="menu_shrines">Direction & distance to holy shrines</string>
+    <string name="menu_shrines">Direction &amp; distance to holy shrines</string>
     <string name="shrine_distance_km">%1$d km</string>
     <string name="shrine_distance_line">Distance to this shrine: %1$d km</string>
     <string name="shrine_measured_from">Measured from: %1$s</string>
@@ -189,7 +189,7 @@
     <string name="shrine_najaf_city">Najaf</string>
     <string name="shrine_karbala_name">Imam Hussein Shrine (a)</string>
     <string name="shrine_karbala_city">Karbala</string>
-    <string name="shrine_kadhimiya_name">Shrine of Imams al-Kadhim & al-Jawad (a)</string>
+    <string name="shrine_kadhimiya_name">Shrine of Imams al-Kadhim &amp; al-Jawad (a)</string>
     <string name="shrine_kadhimiya_city">Kadhimiya, Baghdad</string>
     <string name="shrine_samarra_name">Al-Askari Shrine (a)</string>
     <string name="shrine_samarra_city">Samarra</string>
